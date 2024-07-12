@@ -1,4 +1,4 @@
-﻿namespace DotnetExample.Models
+﻿namespace DotnetExample.Domain.Models
 {
     public class CarModel
     {

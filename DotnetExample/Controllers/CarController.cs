@@ -1,6 +1,4 @@
-﻿using DotnetExample.Contexto;
-using DotnetExample.DTO;
-using DotnetExample.Models;
+﻿using DotnetExample.Domain.DTO;
 using DotnetExample.Service;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

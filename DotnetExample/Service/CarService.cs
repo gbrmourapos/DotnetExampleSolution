@@ -1,21 +1,22 @@
 ﻿using DotnetExample.Contexto;
-using DotnetExample.DTO;
-using DotnetExample.Models;
+using DotnetExample.Domain.DAL;
+using DotnetExample.Domain.DTO;
+using DotnetExample.Domain.Models;
 
 namespace DotnetExample.Service
 {
     public class CarService
     {
-        private readonly CarContext _context;
+        private readonly CarDAL _dal;
 
-        public CarService() 
+        public CarService(DotnetExampleContext context) 
         {
-            _context = CarContext.GetInstance();
+            _dal = new CarDAL(context);
         } 
 
         public CarResponse get(Guid id)
         {
-            var car = _context.get(id);
+            var car = _dal.Select(id);
             var response = new CarResponse()
             {
                 Id = car.Id,
@@ -41,7 +42,7 @@ namespace DotnetExample.Service
                 TankVolume = payload.TankVolume
             };
 
-            _context.insert(model);
+            _dal.Insert(model);
 
             var response = new CarResponse()
             {
@@ -57,7 +58,7 @@ namespace DotnetExample.Service
 
         public List<CarResponse> list()
         {
-            var responses = _context.list().Select((element) =>
+            var responses = _dal.Select().Select((element) =>
             {
                 var respone = new CarResponse()
                 {
@@ -77,7 +78,7 @@ namespace DotnetExample.Service
 
         public void delete(Guid id)
         {
-            _context.delete(id);    
+            _dal.Delete(id);    
         }
 
         public CarResponse update(CarRequest payload, Guid id)
@@ -91,9 +92,9 @@ namespace DotnetExample.Service
                 TankVolume = payload.TankVolume
             };
 
-            _context.update(id, model);
+            _dal.Update(id, model);
             
-            var updatedModel = _context.get(id);
+            var updatedModel = _dal.Select(id);
             var response = new CarResponse()
             {
                 Id = updatedModel.Id,

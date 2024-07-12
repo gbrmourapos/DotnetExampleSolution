@@ -1,3 +1,4 @@
+using DotnetExample.Contexto;
 using DotnetExample.Service;
 using Serilog;
 
@@ -19,6 +20,7 @@ try
     builder.Services.AddSwaggerGen();
 
     builder.Services.AddSingleton<CarService>();
+    builder.Services.AddSingleton<DotnetExampleContext>();
 
     var app = builder.Build();
     if (app.Environment.IsDevelopment())

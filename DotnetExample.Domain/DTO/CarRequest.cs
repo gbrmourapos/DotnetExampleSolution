@@ -1,8 +1,7 @@
-﻿namespace DotnetExample.DTO
+﻿namespace DotnetExample.Domain.DTO
 {
-    public class CarResponse
+    public class CarRequest
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Model { get; set; }
         public string Horsepower { get; set; }
